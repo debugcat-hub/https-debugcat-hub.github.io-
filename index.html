@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>VÉRA Atelier</title>
+<title>VÉRA Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
@@ -19,10 +19,52 @@ body{
 font-family:'Inter',sans-serif;
 background:#0b0b0b;
 color:white;
-height:100vh;
 display:flex;
-align-items:center;
-justify-content:center;
+height:100vh;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:220px;
+background:#111;
+padding:30px 20px;
+display:flex;
+flex-direction:column;
+}
+
+.brand{
+font-family:'Playfair Display',serif;
+font-size:26px;
+margin-bottom:40px;
+letter-spacing:2px;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.menu button{
+background:none;
+border:none;
+color:white;
+text-align:left;
+padding:10px;
+cursor:pointer;
+border-radius:6px;
+}
+
+.menu button:hover{
+background:#1e1e1e;
+}
+
+/* Main area */
+
+.main{
+flex:1;
+padding:40px;
 }
 
 .page{
@@ -33,57 +75,11 @@ display:none;
 display:block;
 }
 
-.box{
-width:360px;
-padding:40px;
-background:rgba(0,0,0,0.6);
-border-radius:16px;
-backdrop-filter:blur(20px);
-text-align:center;
-}
-
-.brand{
-font-family:'Playfair Display',serif;
-font-size:32px;
-margin-bottom:20px;
-letter-spacing:2px;
-}
-
-input{
-width:100%;
-padding:14px;
-margin-bottom:16px;
-background:transparent;
-border:1px solid rgba(255,255,255,0.3);
-border-radius:8px;
-color:white;
-}
-
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:30px;
-background:white;
-color:black;
-font-weight:600;
-cursor:pointer;
-margin-top:5px;
-}
-
-.link{
-margin-top:15px;
-font-size:13px;
-opacity:0.8;
-cursor:pointer;
-}
-
-.dashboard{
-text-align:center;
-}
-
-.logout{
-margin-top:30px;
+.card{
+background:#151515;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
 }
 
 </style>
@@ -91,80 +87,83 @@ margin-top:30px;
 
 <body>
 
-<!-- LOGIN PAGE -->
+<!-- SIDEBAR -->
 
-<div id="loginPage" class="page active">
-<div class="box">
-
-<div class="brand">VÉRA</div>
-
-<input type="email" placeholder="Email">
-<input type="password" placeholder="Password">
-
-<button onclick="showDashboard()">Sign In</button>
-
-<div class="link" onclick="showSignup()">Create Account</div>
-
-</div>
-</div>
-
-
-<!-- SIGNUP PAGE -->
-
-<div id="signupPage" class="page">
-<div class="box">
+<div class="sidebar">
 
 <div class="brand">VÉRA</div>
 
-<input type="text" placeholder="Full Name">
-<input type="email" placeholder="Email">
-<input type="password" placeholder="Password">
-
-<button onclick="showDashboard()">Sign Up</button>
-
-<div class="link" onclick="showLogin()">Back to Login</div>
-
-</div>
+<div class="menu">
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('products')">Products</button>
+<button onclick="showPage('orders')">Orders</button>
+<button onclick="showPage('profile')">Profile</button>
 </div>
 
+</div>
 
-<!-- DASHBOARD PAGE -->
+<!-- MAIN CONTENT -->
 
-<div id="dashboardPage" class="page">
-<div class="box dashboard">
+<div class="main">
 
-<div class="brand">VÉRA</div>
+<!-- HOME -->
 
-<h2>Welcome to VÉRA Atelier</h2>
-<p style="margin-top:10px; opacity:0.7;">
-Luxury Fashion Dashboard
+<div id="home" class="page active">
+<h1>Dashboard</h1>
+
+<div class="card">
+<h3>Welcome to VÉRA Atelier</h3>
+<p style="opacity:0.7;margin-top:10px;">
+Luxury fashion management dashboard.
 </p>
-
-<button class="logout" onclick="showLogin()">Logout</button>
-
 </div>
 </div>
 
+<!-- PRODUCTS -->
+
+<div id="products" class="page">
+<h1>Products</h1>
+
+<div class="card">
+<p>Manage your fashion collections here.</p>
+</div>
+
+</div>
+
+<!-- ORDERS -->
+
+<div id="orders" class="page">
+<h1>Orders</h1>
+
+<div class="card">
+<p>Customer orders will appear here.</p>
+</div>
+
+</div>
+
+<!-- PROFILE -->
+
+<div id="profile" class="page">
+<h1>Profile</h1>
+
+<div class="card">
+<p>User settings and account details.</p>
+</div>
+
+</div>
+
+</div>
 
 <script>
 
-function hideAll(){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
-}
+function showPage(page){
 
-function showLogin(){
-hideAll()
-document.getElementById("loginPage").classList.add("active")
-}
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active")
+})
 
-function showSignup(){
-hideAll()
-document.getElementById("signupPage").classList.add("active")
-}
+document.getElementById(page).classList.add("active")
 
-function showDashboard(){
-hideAll()
-document.getElementById("dashboardPage").classList.add("active")
 }
 
 </script>
